@@ -351,3 +351,261 @@ option {
     font-size: 16px;
   }
 }
+
+.macro-cards{
+  margin-top:20px;
+}
+
+.macro{
+  background: rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.08);
+}
+
+.macro-plan {
+  margin-top: 14px;
+  padding: 18px;
+  border-radius: 20px;
+  color: white;
+}
+
+.macro-plan p {
+  margin: 0 0 6px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.macro-plan h4 {
+  margin: 0 0 12px;
+  font-size: 28px;
+}
+
+.macro-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.macro-row span {
+  padding: 10px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.14);
+  font-size: 13px;
+  font-weight: 700;
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .macro-row {
+    grid-template-columns: 1fr;
+  }
+}
+
+.bodyfat-section {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.bodyfat-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.bodyfat-header p {
+  margin-top: 8px;
+  color: rgba(255, 255, 255, 0.76);
+  line-height: 1.5;
+}
+
+.bodyfat-grid {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
+.bodyfat-card {
+  padding: 12px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.bodyfat-card:hover,
+.bodyfat-card.selected {
+  transform: translateY(-3px);
+  border-color: rgba(34, 197, 94, 0.9);
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.bodyfat-img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 14px;
+  margin-bottom: 10px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.bodyfat-card h3 {
+  margin: 0 0 6px;
+  font-size: 20px;
+}
+
+.bodyfat-card p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.bodyfat-result {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.bodyfat-result h3 {
+  margin: 0 0 8px;
+}
+
+.bodyfat-result p {
+  margin: 6px 0;
+  color: rgba(255, 255, 255, 0.82);
+}
+
+@media (max-width: 768px) {
+  .bodyfat-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comparison-images{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.comparison-images div{
+  display:flex;
+  flex-direction:column;
+}
+
+.img-label{
+  text-align:center;
+  margin-top:6px;
+  font-size:12px;
+  opacity:.7;
+  font-weight:700;
+}
+
+.bodyfat-img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  object-position:center top;
+  border-radius:12px;
+}
+
+@media (max-width:768px){
+  .comparison-images{
+      grid-template-columns:1fr;
+  }
+}
+
+.bodyfat-toggle-btn{
+width:100%;
+margin-top:24px;
+border:none;
+border-radius:16px;
+padding:16px;
+background:linear-gradient(
+135deg,
+#8b5cf6,
+#2563eb
+);
+color:white;
+font-size:16px;
+font-weight:800;
+cursor:pointer;
+box-shadow:
+0 12px 26px rgba(
+37,
+99,
+235,
+0.28
+);
+transition:.2s;
+}
+
+.bodyfat-toggle-btn:hover{
+transform:translateY(-2px);
+}
+
+.timeline-toggle-btn {
+  width: 100%;
+  margin-top: 24px;
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, #f97316, #ef4444);
+  color: white;
+  font-size: 16px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 12px 26px rgba(239, 68, 68, 0.28);
+}
+
+.timeline-section {
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.timeline-header h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.timeline-header p {
+  color: rgba(255, 255, 255, 0.76);
+}
+
+.timeline-result {
+  margin-top: 18px;
+  padding: 16px;
+  border-radius: 18px;
+  background: rgba(0, 0, 0, 0.24);
+}
+
+.timeline-result h3 {
+  margin: 0 0 8px;
+  font-size: 34px;
+}
+
+.calculate-timeline-btn{
+width:100%;
+margin-top:16px;
+padding:15px;
+border:none;
+border-radius:14px;
+font-weight:700;
+font-size:16px;
+cursor:pointer;
+
+background:linear-gradient(
+135deg,
+#10b981,
+#2563eb
+);
+
+color:white;
+}
