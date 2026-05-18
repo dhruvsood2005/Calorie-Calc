@@ -33,6 +33,7 @@ const [goalWeight, setGoalWeight] = useState("");
 const [timelineSpeed, setTimelineSpeed] = useState("0.5");
 
 const [timelineCalculated, setTimelineCalculated] = useState(false);
+const [bodyFatGoalCalculated, setBodyFatGoalCalculated] = useState(false);
 
   const bodyFatOptions = [
   {
@@ -73,6 +74,17 @@ const [timelineCalculated, setTimelineCalculated] = useState(false);
   }
 ];
 
+function getBodyFatNumber(label: string) {
+  if (label === "10-12%") return 11;
+  if (label === "13-15%") return 14;
+  if (label === "16-18%") return 17;
+  if (label === "19-22%") return 20.5;
+  if (label === "23-27%") return 25;
+  if (label === "28%+") return 28;
+
+  return 0;
+}
+
 const currentWeightNum = Number(weight);
 const goalWeightNum = Number(goalWeight);
 const timelineSpeedNum = Number(timelineSpeed);
@@ -85,6 +97,34 @@ const weeksNeeded =
 
 const isLosing =
   goalWeightNum < currentWeightNum;
+
+  const currentBodyFatNum =
+  getBodyFatNumber(currentBodyFat);
+
+const goalBodyFatNum =
+  getBodyFatNumber(goalBodyFat);
+
+const leanBodyMass =
+  currentWeightNum *
+  (1 - currentBodyFatNum / 100);
+
+const estimatedGoalWeightFromBodyFat =
+  goalBodyFatNum > 0
+    ? leanBodyMass /
+      (1 - goalBodyFatNum / 100)
+    : 0;
+
+const fatToLoseForBodyFatGoal =
+  currentWeightNum -
+  estimatedGoalWeightFromBodyFat;
+
+const bodyFatGoalWeeks =
+  fatToLoseForBodyFatGoal > 0
+    ? Math.ceil(
+        fatToLoseForBodyFatGoal /
+        timelineSpeedNum
+      )
+    : 0;
 
   function calculateMacros(calories: number, weightNum: number): MacroPlan {
     const protein = Math.round(weightNum * 2.2);
@@ -140,6 +180,20 @@ const isLosing =
       bulk: calculateMacros(tdee + bulkAdjustment, weightNum),
     });
   }
+
+  function calculateBodyFatGoal() {
+  if (!age || !gender || !height || !weight || !activity || !goalSpeed) {
+    alert("Please fill in your age, gender, height, weight, activity level, and goal speed first.");
+    return;
+  }
+
+  if (!currentBodyFat || !goalBodyFat) {
+    alert("Please select your current body fat and goal body fat first.");
+    return;
+  }
+
+  setBodyFatGoalCalculated(true);
+}
 
   return (
     <div className="page">
@@ -521,6 +575,48 @@ to
             measurements and your
             calorie targets.
           </p>
+
+         <button
+  type="button"
+  className="calculate-bodyfat-goal-btn"
+  onClick={calculateBodyFatGoal}
+>
+  Calculate Body Fat Goal Timeline
+</button>
+
+{bodyFatGoalCalculated &&
+  weight &&
+  fatToLoseForBodyFatGoal > 0 && (
+    <div className="bodyfat-goal-estimate">
+      <h3>Estimated body fat goal timeline</h3>
+
+      <p>
+        You may need to lose around{" "}
+        <strong>{fatToLoseForBodyFatGoal.toFixed(1)}kg</strong> to reach{" "}
+        <strong>{goalBodyFat}</strong>.
+      </p>
+
+      <p>
+        Estimated target weight:{" "}
+        <strong>{estimatedGoalWeightFromBodyFat.toFixed(1)}kg</strong>
+      </p>
+
+      <p>
+        Estimated time: <strong>{bodyFatGoalWeeks} weeks</strong>
+      </p>
+    </div>
+  )}
+
+{bodyFatGoalCalculated &&
+  weight &&
+  fatToLoseForBodyFatGoal <= 0 && (
+    <div className="bodyfat-goal-estimate">
+      <h3>Goal already reached or not valid</h3>
+      <p>
+        Your selected goal body fat is not lower than your current estimate.
+      </p>
+    </div>
+  )}
         </div>
       )}
   </div>
